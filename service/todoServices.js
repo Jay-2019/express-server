@@ -1,6 +1,7 @@
 //Services - The services contains the database queries and returning objects or throwing errors.
 
-const { myTodo, userProfile } = require('../model/schema');
+const{myTodo}=require('../model/todoSchema');
+const{userProfile}=require('../model/userSchema');
 
 //signUp routes
 exports.signUp = (req, res) => {
@@ -37,24 +38,30 @@ exports.listAllTodo = (req, res) => {
     });
 };
 // edit particular todo
-exports.editTodo = () => {
+exports.editTodo = (req, res) => {
     let id = req.params.id;
-    myTodo.findById(id, (err, todo) => {
-        res.json(todo);
+    console.log(id);
+    myTodo.findById(id, (err, todos) => {
+        if (err) {
+            console.log(err.message);
+        } else {
+            res.json(todos);
+        }
+
     });
 };
 // store updated todo
-exports.updateTodo = () => {
-    myTodo.findById(req.params.id, (err, todo) => {
-        if (!todo)
+exports.updateTodo = (req, res) => {
+    myTodo.findById(req.params.id, (err, todos) => {
+        if (!todos)
             res.status(404).send("data is not found");
         else
-            todo.Description = req.body.Description;
-        todo.Responsible = req.body.Responsible;
-        todo.Priority = req.body.Priority;
-        todo.Completed = req.body.Completed;
+        todos.Description = req.body.Description;
+        todos.Responsible = req.body.Responsible;
+        todos.Priority = req.body.Priority;
+        todos.Completed = req.body.Completed;
 
-        todo.save().then(todo => {
+        todos.save().then(todos => {
             res.json('Todo updated!');
         })
             .catch(err => {

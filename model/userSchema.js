@@ -1,23 +1,8 @@
+
 //Models - The schema definition of the Model
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-let todoSchema = new Schema({
-
-    Description: {
-        type: String
-    },
-    Responsible: {
-        type: String
-    },
-    Priority: {
-        type: String
-    },
-    Completed: {
-        type: Boolean
-    }
-});
 
 let userProfileSchema = new Schema({
     profileImage: {
@@ -25,23 +10,31 @@ let userProfileSchema = new Schema({
         contentType: String
     },
     userName: {
-        type: String
+        type: String,
+        unique: true,
+        required: true
     },
     gender: {
         type: String
     },
     email: {
-        type: String
+        type: String,
+        lowercase: true,
+        unique: true,
+        required: true
     },
     createPassword: {
-        type: String
+        type: String,
+        required: true
     },
     confirmPassword: {
-        type: String
+        type: String,
+        required: true
     },
 
     termsAndConditions: {
-        type: Boolean
+        type: Boolean,
+        required: true
     },
     signupDate: {
         type: Date,
@@ -55,7 +48,5 @@ let userProfileSchema = new Schema({
         ref: 'todoSchema'
     }
 });
-
-let myTodo = mongoose.model('todoSchema', todoSchema, 'myTodo');
 let userProfile = mongoose.model('userProfileSchema', userProfileSchema, 'userProfile');
-module.exports = { myTodo, userProfile };
+module.exports = { userProfile };
