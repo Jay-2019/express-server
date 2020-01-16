@@ -10,15 +10,18 @@ const todoServices = require('../service/todoServices')
 router.post('/signUp', todoServices.signUp);
 
 //create new todo
-router.post('/add', todoServices.addNewTodo);
+router.post('/createTodo', todoServices.addNewTodo);
 
 // list of all todo
 router.get('/listTodo', todoServices.listAllTodo);
 
 // edit particular todo
-router.get('/:id', todoServices.editTodo);
+router.get('/editTodo/:id', todoServices.editTodo);
+
+// delete particular todo
+router.get('/deleteTodo/:id', todoServices.deleteTodo);
 
 // store updated todo
-router.post('/update/:id', todoServices.updateTodo);
+router.post('/updateTodo/:id', todoServices.updateTodo);
 
 module.exports = router;
