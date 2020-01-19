@@ -14,6 +14,6 @@
     "cors": "*",
     "express": "^4.17.1",
     "mongoose": "*",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.2"
   }
 }

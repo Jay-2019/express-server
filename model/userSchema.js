@@ -11,7 +11,7 @@ let userProfileSchema = new Schema({
     },
     userName: {
         type: String,
-        unique: true,
+        // unique: true,
         required: true
     },
     gender: {
@@ -19,8 +19,8 @@ let userProfileSchema = new Schema({
     },
     email: {
         type: String,
-        lowercase: true,
-        unique: true,
+        // lowercase: true,
+        // unique: true,
         required: true
     },
     createPassword: {

@@ -9,6 +9,9 @@ const todoServices = require('../service/todoServices')
 //signUp routes
 router.post('/signUp', todoServices.signUp);
 
+// user Authentication
+router.get('/authentication', todoServices.authentication);
+
 //create new todo
 router.post('/createTodo', todoServices.addNewTodo);
 

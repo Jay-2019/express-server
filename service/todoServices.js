@@ -3,12 +3,19 @@
 const { myTodo } = require('../model/todoSchema');
 const { userProfile } = require('../model/userSchema');
 
+// authentication routes
+exports.authentication = (req, res) => {
+    userProfile.find((err, userProfile) => {
+        err ? console.log(err.message) : res.json(userProfile);
+    });
+};
+
 //signUp routes
 exports.signUp = (req, res) => {
     let newUser = new userProfile(req.body);
     newUser.save()
         .then(signUp => {
-            req.status(200).json({ 'signUp': 'signUp successfully' });
+            res.status(200).json({ 'signUp': 'signUp successfully' });
         })
         .catch(err => {
             res.status(400).send('signUp failed');
