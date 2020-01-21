@@ -14,6 +14,7 @@
     "cors": "*",
     "express": "^4.17.1",
     "mongoose": "*",
+    "mongoose-timestamp": "^0.6.0",
     "nodemon": "^2.0.2"
   }
 }

@@ -2,12 +2,13 @@
 //Models - The schema definition of the Model
 
 const mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 const Schema = mongoose.Schema;
 
 let userProfileSchema = new Schema({
     profileImage: {
         data: Buffer,
-        contentType: String
+        contentType: 'String'
     },
     userName: {
         type: String,
@@ -42,11 +43,7 @@ let userProfileSchema = new Schema({
     },
     isUserExist: {
         type: Boolean
-    },
-    myTodo: {
-        type: Schema.Types.ObjectId,
-        ref: 'todoSchema'
     }
 });
-let userProfile = mongoose.model('userProfileSchema', userProfileSchema, 'userProfile');
-module.exports = { userProfile };
+userProfileSchema.plugin(timestamps);
+module.exports = mongoose.model('user', userProfileSchema, 'userProfile');

@@ -12,6 +12,9 @@ router.post('/signUp', todoServices.signUp);
 // user Authentication
 router.get('/authentication', todoServices.authentication);
 
+//get current User(logged-In) Id
+router.get('/currentUser/:email/:password', todoServices.currentUser);
+
 //create new todo
 router.post('/createTodo', todoServices.addNewTodo);
 

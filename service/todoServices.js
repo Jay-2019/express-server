@@ -1,7 +1,8 @@
 //Services - The services contains the database queries and returning objects or throwing errors.
 
-const { myTodo } = require('../model/todoSchema');
-const { userProfile } = require('../model/userSchema');
+// const { myTodo } = require('../model/todoSchema');
+const myTodo = require('../model/todoSchema');
+const userProfile = require('../model/userSchema');
 
 // authentication routes
 exports.authentication = (req, res) => {
@@ -22,9 +23,16 @@ exports.signUp = (req, res) => {
             console.log(err.message);
         });
 };
+// return currentUser Id
+exports.currentUser = (req, res) => {
+    let { email, password } = req.params;
+    userProfile.findOne({ email: email, confirmPassword: password }, (err, userProfile) => err ? console.log(err.message) : res.json(userProfile))
+}
 //create new todo
 exports.addNewTodo = (req, res) => {
     let todo = new myTodo(req.body);
+    // todo.populate('user);
+    todo.user.push("5d934e48d5f96939d4df7c34");
     todo.save()
         .then(todo => {
             res.status(200).json({ 'todo': 'todo added successfully' });
@@ -47,7 +55,6 @@ exports.listAllTodo = (req, res) => {
 // edit particular todo
 exports.editTodo = (req, res) => {
     let id = req.params.id;
-    console.log(id);
     myTodo.findById(id, (err, todos) => {
         if (err) {
             console.log(err.message);
@@ -57,7 +64,7 @@ exports.editTodo = (req, res) => {
 
     });
 };
-
+// Delete particular todo
 exports.deleteTodo = (req, res) => {
     let id = req.params.id;
     console.log(id);
