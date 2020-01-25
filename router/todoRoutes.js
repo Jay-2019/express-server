@@ -16,10 +16,10 @@ router.get('/authentication', todoServices.authentication);
 router.get('/currentUser/:email/:password', todoServices.currentUser);
 
 //create new todo
-router.post('/createTodo', todoServices.addNewTodo);
+router.post('/createTodo/:id', todoServices.addNewTodo);
 
 // list of all todo
-router.get('/listTodo', todoServices.listAllTodo);
+router.get('/listTodo/:id', todoServices.listAllTodo);
 
 // edit particular todo
 router.get('/editTodo/:id', todoServices.editTodo);

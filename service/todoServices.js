@@ -23,16 +23,18 @@ exports.signUp = (req, res) => {
             console.log(err.message);
         });
 };
+
 // return currentUser Id
 exports.currentUser = (req, res) => {
     let { email, password } = req.params;
     userProfile.findOne({ email: email, confirmPassword: password }, (err, userProfile) => err ? console.log(err.message) : res.json(userProfile))
 }
+
 //create new todo
 exports.addNewTodo = (req, res) => {
     let todo = new myTodo(req.body);
     // todo.populate('user);
-    todo.user.push("5d934e48d5f96939d4df7c34");
+    todo.user.push(req.params.id);
     todo.save()
         .then(todo => {
             res.status(200).json({ 'todo': 'todo added successfully' });
@@ -42,16 +44,24 @@ exports.addNewTodo = (req, res) => {
             console.log(err.message);
         });
 };
+
 // list of all todo
 exports.listAllTodo = (req, res) => {
     myTodo.find((err, todos) => {
         if (err) {
             console.log(err.message);
         } else {
+            let arr = todos;
+            let test = arr.map(data => {
+                if (data.user[0] == req.params.id) {
+                    return data;
+                }
+            })
             res.json(todos);
         }
     });
 };
+
 // edit particular todo
 exports.editTodo = (req, res) => {
     let id = req.params.id;
@@ -61,14 +71,11 @@ exports.editTodo = (req, res) => {
         } else {
             res.json(todos);
         }
-
     });
 };
 // Delete particular todo
 exports.deleteTodo = (req, res) => {
-    let id = req.params.id;
-    console.log(id);
-
+    // let id = req.params.id;
     myTodo.findByIdAndRemove(req.params.id, (err) => {
         err ? err.message : res.json({ message: "Todo Deleted Successfully" });
     });

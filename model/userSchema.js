@@ -43,6 +43,9 @@ let userProfileSchema = new Schema({
     },
     isUserExist: {
         type: Boolean
+    },
+    isLoggedIn: {
+        type: Boolean
     }
 });
 userProfileSchema.plugin(timestamps);

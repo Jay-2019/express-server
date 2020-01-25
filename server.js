@@ -13,7 +13,7 @@ server.use(cors());
 server.use(cookieParser());
 
 //mongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/todos', { useUnifiedTopology: true, useNewUrlParser: true,useCreateIndex: true, });
+mongoose.connect('mongodb://127.0.0.1:27017/todos', { useUnifiedTopology: true, useNewUrlParser: true,useCreateIndex: true,  useFindAndModify: false});
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
